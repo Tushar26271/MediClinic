@@ -4,17 +4,54 @@
     ViewData["Title"] = "Assign Doctor";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+@if (!ViewData.ModelState.IsValid)
+{
+    <script>
+        window.onload = function () {
+            alert("Doctor already booked for this time.");
+        };
+    </script>
+}
 
 
-        <div class="admin-form-wrapper">
-            <div class="admin-form-card">
-        <h4 class="form-title"><center>Assign Doctor</center></h4>
+
+<h2>Assign Doctor</h2>
+
+<div class="row">
+    <div class="col-md-6">
+
         <form asp-action="AssignDoctorPost" method="post">
 
             <!-- Hidden Appointment ID -->
             <input type="hidden"
                    name="AppointmentID"
                    value="@Model.AppointmentId" />
+
+            <div class="mb-3">
+                <label class="form-label">Patient Name</label>
+                <input type="text"
+                       name="PatientName"
+                       value="@Model.Patient.PatientName"
+                       class="form-control"
+                       readonly />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Criticality</label>
+                <input type="text"
+                       name="Criticality"
+                       value="@Model.Criticality"
+                       class="form-control"
+                       readonly />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Reason</label>
+                <input type="text"
+                       name="Reason"
+                       value="@Model.Reason"
+                       class="form-control"
+                       readonly />
+            </div>
+            
 
             <div class="mb-3">
                 <label class="form-label">Select Doctor</label>
@@ -40,6 +77,7 @@
                 <input type="time"
                        name="ScheduleTime"
                        class="form-control"
+                       value="@Model.AppointmentDate?.ToString("HH:mm")"
                        required />
             </div>
 

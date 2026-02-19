@@ -1149,9 +1149,9 @@ namespace MediClinic.Controllers
             return View(schedule);
         }
 
-        // GET: AdminSchedules/Create
         public async Task<IActionResult> CreateSchedule(int id)
         {
+            // Get appointment
             var appointment = await _context.Appointments
                 .Include(a => a.Patient)
                 .FirstOrDefaultAsync(a => a.AppointmentId == id);
@@ -1159,14 +1159,36 @@ namespace MediClinic.Controllers
             if (appointment == null)
                 return NotFound();
 
+            // Extract date & time from Appointment
+            var scheduleDate = DateOnly.FromDateTime(appointment.AppointmentDate.Value);
+            var scheduleTime = TimeOnly.FromDateTime(appointment.AppointmentDate.Value);
+
+            // Get doctors already scheduled at same date & time
+            var busyDoctorIds = await _context.Schedules
+                .Where(s => s.ScheduleDate == scheduleDate
+                         && s.ScheduleTime == scheduleTime
+                         && s.ScheduleStatus == "Scheduled")
+                .Select(s => s.PhysicianId)
+                .ToListAsync();
+
+            // Get available doctors (exclude busy ones)
+            var availableDoctors = await _context.Physicians
+                .Where(p => !busyDoctorIds.Contains(p.PhysicianId))
+                .ToListAsync();
+
             ViewBag.Physicians = new SelectList(
-                _context.Physicians
-                    .Where(p => p.PhysicianStatus == "Active"),
+                availableDoctors,
                 "PhysicianId",
-                "PhysicianName");
+                "PhysicianName"
+            );
 
             return View(appointment);
         }
+
+
+        // GET: AdminSchedules/Create
+
+
 
         [HttpPost]
         public async Task<IActionResult> AssignDoctorPost(
@@ -1175,28 +1197,53 @@ namespace MediClinic.Controllers
     DateTime ScheduleDate,
     TimeSpan ScheduleTime)
         {
-            // 1️⃣ Insert into Schedule table
+            var exists = await _context.Schedules.AnyAsync(s =>
+                s.PhysicianId == PhysicianID &&
+                s.ScheduleDate == DateOnly.FromDateTime(ScheduleDate) &&
+                s.ScheduleTime == TimeOnly.FromTimeSpan(ScheduleTime));
+
+            if (exists)
+            {
+                ModelState.AddModelError("", "Doctor already booked for this time.");
+
+                // Reload appointment with patient details
+                var appointmentData = await _context.Appointments
+                    .Include(a => a.Patient)
+                    .FirstOrDefaultAsync(a => a.AppointmentId == AppointmentID);
+
+                ViewBag.Physicians = new SelectList(_context.Physicians,
+                                                    "PhysicianId",
+                                                    "PhysicianName");
+
+                return View("CreateSchedule", appointmentData);
+            }
+
+            // Create Schedule
             var schedule = new Schedule
             {
                 AppointmentId = AppointmentID,
-               PhysicianId = PhysicianID,
+                PhysicianId = PhysicianID,
                 ScheduleDate = DateOnly.FromDateTime(ScheduleDate),
                 ScheduleTime = TimeOnly.FromTimeSpan(ScheduleTime),
-
                 ScheduleStatus = "Scheduled"
             };
 
             _context.Schedules.Add(schedule);
 
-            // 2️⃣ Update Appointment Status
             var appointment = await _context.Appointments.FindAsync(AppointmentID);
-            
-            appointment.ScheduleStatus = "Assigned";
+            if (appointment != null)
+            {
+                appointment.ScheduleStatus = "Assigned";
+            }
 
             await _context.SaveChangesAsync();
 
-            return RedirectToAction(nameof(PendingAppointments));
+            return RedirectToAction("GetAppointmentDetails");
         }
+
+
+
+
 
 
         // GET: AdminSchedules/Edit/5
