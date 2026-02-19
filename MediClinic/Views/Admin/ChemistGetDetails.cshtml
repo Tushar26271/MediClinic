@@ -5,137 +5,10 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<style>
-    /* Page Background */
-    body {
-        background: linear-gradient(135deg, #1e3c72, #2a5298);
-    }
-
-    /* Main Card */
-    .admin-card {
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(12px);
-        border-radius: 15px;
-        padding: 20px;
-        margin-bottom: 20px;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-        color: white;
-    }
-
-    .table-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .page-title {
-        font-weight: 600;
-        letter-spacing: 1px;
-    }
-
-    /* Buttons */
-    .btn-create {
-        background: #00c6ff;
-        border: none;
-        padding: 8px 18px;
-        border-radius: 8px;
-        color: white;
-        font-weight: 500;
-        transition: 0.3s;
-    }
-
-    .btn-create:hover {
-        background: #0072ff;
-        transform: scale(1.05);
-    }
-
-    .btn-edit {
-        background: #ffc107;
-        color: black;
-        padding: 5px 10px;
-        border-radius: 6px;
-        text-decoration: none;
-    }
-
-    .btn-details {
-        background: #17a2b8;
-        color: white;
-        padding: 5px 10px;
-        border-radius: 6px;
-        text-decoration: none;
-    }
-
-    .btn-delete {
-        background: #dc3545;
-        color: white;
-        padding: 5px 10px;
-        border-radius: 6px;
-        text-decoration: none;
-    }
-
-    .btn-edit:hover,
-    .btn-details:hover,
-    .btn-delete:hover {
-        opacity: 0.85;
-        transform: scale(1.05);
-        transition: 0.3s;
-    }
-
-    /* Table Styling */
-    .admin-table {
-        width: 100%;
-        background: white;
-        border-radius: 12px;
-        overflow: hidden;
-        box-shadow: 0 5px 20px rgba(0,0,0,0.15);
-    }
-
-    .admin-table thead {
-        background: #2a5298;
-        color: white;
-    }
-
-    .admin-table th,
-    .admin-table td {
-        padding: 12px;
-        text-align: center;
-    }
-
-    .admin-table tbody tr {
-        transition: 0.3s;
-    }
-
-    .admin-table tbody tr:hover {
-        background-color: #f1f7ff;
-        transform: scale(1.01);
-    }
-
-    /* Status Badge */
-    .badge-active {
-        background: #28a745;
-        color: white;
-        padding: 5px 10px;
-        border-radius: 20px;
-        font-size: 12px;
-    }
-
-    .badge-inactive {
-        background: #dc3545;
-        color: white;
-        padding: 5px 10px;
-        border-radius: 20px;
-        font-size: 12px;
-    }
-
-    /* Responsive */
-    .table-responsive {
-        overflow-x: auto;
-    }
-</style>
 
 <div class="admin-card">
     <div class="table-header">
-        <h4 class="page-title">💊 Chemist Management</h4>
+        <h4 class="page-title"> Chemist Management</h4>
         <a asp-action="CreateChemist" class="btn btn-create">+ Create New Chemist</a>
     </div>
 </div>
@@ -148,7 +21,7 @@
                 <th>Address</th>
                 <th>Phone</th>
                 <th>Email</th>
-                <th>Status</th>
+                
                 <th>Actions</th>
             </tr>
         </thead>
@@ -160,16 +33,7 @@
                     <td>@item.Address</td>
                     <td>@item.Phone</td>
                     <td>@item.Email</td>
-                    <td>
-                        @if (item.ChemistStatus == "Active")
-                        {
-                            <span class="badge-active">Active</span>
-                        }
-                        else
-                        {
-                            <span class="badge-inactive">Inactive</span>
-                        }
-                    </td>
+                    
                     <td>
                         <a class="btn btn-edit" asp-action="EditChemist" asp-route-id="@item.ChemistId">Edit</a>
                         <a class="btn btn-details" asp-action="ChemistGetDetailsById" asp-route-id="@item.ChemistId">Details</a>
