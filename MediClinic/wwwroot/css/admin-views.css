@@ -113,6 +113,8 @@ body {
     overflow-x: auto;
 }
 
+
+
 /* =========================================
    STATUS BADGES
 ========================================= */
@@ -275,10 +277,38 @@ body {
         box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.15);
     }
 
+
+.form-actions-fix {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+    .form-actions-fix .btn,
+    .form-actions-fix .btn-back {
+        height: 42px;
+        padding: 0 20px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+    }
+
+/* Custom back button style */
+.btn-back {
+    background-color: #f1f3f6;
+    color: #555;
+    text-decoration: none;
+}
+
+
+
 /* Validation Errors */
 .text-danger {
     font-size: 13px;
 }
+
+
 
 /* =========================================
    FORM BUTTONS
