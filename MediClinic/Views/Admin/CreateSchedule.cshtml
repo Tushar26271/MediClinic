@@ -4,6 +4,7 @@
     ViewData["Title"] = "Assign Doctor";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+
 @if (!ViewData.ModelState.IsValid)
 {
     <script>
@@ -13,12 +14,10 @@
     </script>
 }
 
+<div class="admin-form-wrapper">
+    <div class="admin-form-card">
 
-
-<h2>Assign Doctor</h2>
-
-<div class="row">
-    <div class="col-md-6">
+        <h4 class="form-title text-center mb-4">Assign Doctor</h4>
 
         <form asp-action="AssignDoctorPost" method="post">
 
@@ -27,44 +26,47 @@
                    name="AppointmentID"
                    value="@Model.AppointmentId" />
 
+            <!-- Patient Name -->
             <div class="mb-3">
-                <label class="form-label">Patient Name</label>
+                <label class="form-label fw-semibold">Patient Name</label>
                 <input type="text"
-                       name="PatientName"
                        value="@Model.Patient.PatientName"
                        class="form-control"
                        readonly />
             </div>
+
+            <!-- Criticality -->
             <div class="mb-3">
-                <label class="form-label">Criticality</label>
+                <label class="form-label fw-semibold">Criticality</label>
                 <input type="text"
-                       name="Criticality"
                        value="@Model.Criticality"
                        class="form-control"
                        readonly />
             </div>
+
+            <!-- Reason -->
             <div class="mb-3">
-                <label class="form-label">Reason</label>
+                <label class="form-label fw-semibold">Reason</label>
                 <input type="text"
-                       name="Reason"
                        value="@Model.Reason"
                        class="form-control"
                        readonly />
             </div>
-            
 
+            <!-- Select Doctor -->
             <div class="mb-3">
-                <label class="form-label">Select Doctor</label>
+                <label class="form-label fw-semibold">Select Doctor</label>
                 <select name="PhysicianID"
                         asp-items="ViewBag.Physicians"
-                        class="form-control"
+                        class="form-select"
                         required>
                     <option value="">-- Select Doctor --</option>
                 </select>
             </div>
 
+            <!-- Schedule Date -->
             <div class="mb-3">
-                <label class="form-label">Date</label>
+                <label class="form-label fw-semibold">Date</label>
                 <input type="date"
                        name="ScheduleDate"
                        class="form-control"
@@ -72,8 +74,9 @@
                        required />
             </div>
 
-            <div class="mb-3">
-                <label class="form-label">Time</label>
+            <!-- Schedule Time -->
+            <div class="mb-4">
+                <label class="form-label fw-semibold">Time</label>
                 <input type="time"
                        name="ScheduleTime"
                        class="form-control"
@@ -81,10 +84,20 @@
                        required />
             </div>
 
-            <button type="submit" class="btn btn-success">
-                Assign
-            </button>
+            <!-- Buttons -->
+            <div class="d-flex justify-content-between">
+                <a asp-action="PendingAppointments"
+                   class="btn btn-secondary">
+                    Back
+                </a>
+
+                <button type="submit"
+                        class="btn btn-success px-4">
+                    Assign
+                </button>
+            </div>
 
         </form>
+
     </div>
 </div>
