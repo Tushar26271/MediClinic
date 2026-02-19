@@ -1,0 +1,49 @@
+﻿@model MediClinic.Models.Schedule
+
+@{
+    ViewData["Title"] = "GetScheduleById";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1>GetScheduleById</h1>
+
+<div>
+    <h4>Schedule</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ScheduleDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ScheduleDate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ScheduleTime)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ScheduleTime)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ScheduleStatus)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ScheduleStatus)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Appointment)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Appointment.AppointmentId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Physician)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Physician.Address)
+        </dd>
+    </dl>
+</div>
+<div>
+    
+    <a asp-action="GetSchedule">Back to List</a>
+</div>

@@ -1,0 +1,49 @@
+﻿@model MediClinic.Models.Supplier
+
+@{
+    ViewData["Title"] = "SupplierGetDetailsById";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<div class="admin-form-wrapper">
+    <div class="admin-form-card">
+        <h1>Supplier Details</h1>
+        <dl class="row details-list">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SupplierName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SupplierName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SupplierStatus)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SupplierStatus)
+        </dd>
+    </dl>
+
+
+        <a asp-action="EditSupplier" asp-route-id="@Model?.SupplierId" class="details-btn details-btn-edit">Edit</a> 
+        <a asp-action="SupplierGetDetails" class="details-btn details-btn-back">Back to List</a>
+</div>
+</div>

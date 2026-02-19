@@ -1,0 +1,35 @@
+﻿@model IEnumerable<MediClinic.Models.DrugRequest>
+@{
+    Layout = "~/Views/Shared/_LayoutChemist.cshtml";
+}
+
+<h3>Drug Requests</h3>
+
+<div class="mb-3">
+    
+    <a asp-action="CreatePO" class="btn btn-primary">+ Create PO</a>
+</div>
+
+<table class="table table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>Physician</th>
+            <th>Date</th>
+            <th>Info</th>
+            
+            
+            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var r in Model)
+        {
+            <tr>
+                <td>@r.Physician?.PhysicianName</td>
+                <td>@r.RequestDate?.ToShortDateString()</td>
+                <td>@r.DrugsInfoText</td>
+                
+            </tr>
+        }
+    </tbody>
+</table>

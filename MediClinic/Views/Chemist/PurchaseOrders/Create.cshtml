@@ -1,0 +1,137 @@
+﻿@model MediClinic.Models.ChemistViewModel.PurchaseOrderVM
+@{
+    ViewData["Title"] = "Create Purchase Order";
+    Layout = "~/Views/Shared/_LayoutChemist.cshtml";
+}
+
+<h3>Create Purchase Order</h3>
+
+<form asp-action="CreatePO" method="post" id="poForm">
+    <div class="mb-3">
+        <label>PONo</label>
+        <input asp-for="PONo" class="form-control" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label>Supplier</label>
+        <select name="SupplierId" class="form-select">
+            <option value="">-- Select Supplier --</option>
+            @foreach (var s in Model.Suppliers)
+            {
+                <text>
+                    @if (s.Value == Model.SupplierId.ToString())
+                    {
+                    <option value="@s.Value" selected>@s.Text</option>
+                }
+                else
+                {
+                    <option value="@s.Value">@s.Text</option>
+                }
+                </text>
+            }
+        </select>
+        <span asp-validation-for="SupplierId" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label>PO Date</label>
+        <input asp-for="PODate" class="form-control" type="date" />
+        <span asp-validation-for="PODate" class="text-danger"></span>
+    </div>
+    <h5>Products</h5>
+    <table class="table table-bordered" id="productTable">
+        <thead>
+            <tr>
+                <th>SlNo</th>
+                <th>Drug</th>
+                <th>Qty</th>
+                <th>Note</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.ProductLines.Count; i++)
+            {
+                <tr>
+                    <td class="slno">@Model.ProductLines[i].SlNo</td>
+                    <td>
+                        <select name="ProductLines[@i].DrugId" class="form-select">
+                            <option value="">-- Select Drug --</option>
+                            @foreach (var d in ViewBag.Drugs)
+                            {
+                                <text>
+                                    @if (d.DrugId == Model.ProductLines[i].DrugId)
+                                    {
+                                    <option value="@d.DrugId" selected>@d.DrugTitle</option>
+                                }
+                                else
+                                {
+                                    <option value="@d.DrugId">@d.DrugTitle</option>
+                                }
+                                </text>
+                            }
+                        </select>
+                        <span asp-validation-for="ProductLines[@i].DrugId" class="text-danger"></span>
+                    </td>
+                    <td>
+                        <input type="number" name="ProductLines[@i].Qty" class="form-control" min="1" value="@Model.ProductLines[i].Qty" />
+                    </td>
+                    <td>
+                        <input type="text" name="ProductLines[@i].Note" class="form-control" value="@Model.ProductLines[i].Note" />
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger btn-sm removeRow">-</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <button type="button" class="btn btn-primary" id="addRow">+ Add Row</button>
+    <br /><br />
+    <button type="submit" class="btn btn-success">Save Purchase Order</button>
+    <a asp-action="PurchaseOrders" class="btn btn-secondary">Back</a>
+</form>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(function() {
+            var rowIndex = @Model.ProductLines.Count;
+
+            // Add row dynamically
+            $("#addRow").click(function () {
+                rowIndex++;
+                var row = `<tr>
+                    <td class="slno">${rowIndex}</td>
+                    <td>
+                        <select name="ProductLines[${rowIndex-1}].DrugId" class="form-select">
+                            <option value="">-- Select Drug --</option>
+                            @foreach (var d in ViewBag.Drugs)
+                            {
+                                    <text><option value="@d.DrugId">@d.DrugTitle</option></text>
+                            }
+                        </select>
+                    </td>
+                    <td><input type="number" name="ProductLines[${rowIndex-1}].Qty" class="form-control" min="1" value="1"/></td>
+                    <td><input type="text" name="ProductLines[${rowIndex-1}].Note" class="form-control" /></td>
+                    <td><button type="button" class="btn btn-danger btn-sm removeRow">-</button></td>
+                </tr>`;
+                $("#productTable tbody").append(row);
+                updateSlNo();
+            });
+
+            // Remove row
+            $("#productTable").on("click", ".removeRow", function () {
+                $(this).closest("tr").remove();
+                updateSlNo();
+            });
+
+            // Update SlNo
+            function updateSlNo() {
+                $("#productTable tbody tr").each(function (i) {
+                    $(this).find(".slno").text(i + 1);
+                });
+            }
+        });
+    </script>
+}

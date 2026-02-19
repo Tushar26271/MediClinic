@@ -1,0 +1,158 @@
+﻿@model MediClinic.Models.Chemist
+
+@{
+    ViewData["Title"] = "Create Chemist";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+    body {
+        background: linear-gradient(135deg, #1e3c72, #2a5298);
+    }
+
+    .admin-form-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 85vh;
+    }
+
+    .admin-form-card {
+        width: 100%;
+        max-width: 600px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(15px);
+        border-radius: 20px;
+        padding: 35px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+        color: white;
+        animation: fadeIn 0.6s ease-in-out;
+    }
+
+    .form-title {
+        font-weight: 600;
+        margin-bottom: 25px;
+        letter-spacing: 1px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        font-weight: 500;
+        margin-bottom: 6px;
+    }
+
+    .form-control {
+        border-radius: 10px;
+        padding: 10px;
+        border: none;
+        outline: none;
+        transition: 0.3s;
+    }
+
+        .form-control:focus {
+            box-shadow: 0 0 10px #00c6ff;
+            transform: scale(1.02);
+        }
+
+    .text-danger {
+        font-size: 13px;
+    }
+
+    .form-actions-fix {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+
+    .btn-primary {
+        background: #00c6ff;
+        border: none;
+        padding: 8px 20px;
+        border-radius: 8px;
+        transition: 0.3s;
+    }
+
+        .btn-primary:hover {
+            background: #0072ff;
+            transform: scale(1.05);
+        }
+
+    .btn-secondary {
+        background: #6c757d;
+        border: none;
+        padding: 8px 20px;
+        border-radius: 8px;
+        transition: 0.3s;
+    }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: scale(1.05);
+        }
+
+    
+    }
+
+    
+</style>
+
+<div class="admin-form-wrapper">
+    <div class="admin-form-card">
+        <h4 class="form-title text-center">💊 Create Chemist</h4>
+
+        <form asp-action="CreateChemist">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="ChemistName"></label>
+                <input asp-for="ChemistName" class="form-control" />
+                <span asp-validation-for="ChemistName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Address"></label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Phone"></label>
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Summary"></label>
+                <input asp-for="Summary" class="form-control" />
+                <span asp-validation-for="Summary" class="text-danger"></span>
+            </div>
+<<<<<<< Updated upstream
+            <div class="form-group">
+                <label asp-for="ChemistStatus" class="control-label"></label>
+                <input asp-for="ChemistStatus" class="form-control" />
+                <span asp-validation-for="ChemistStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="ChemistGetDetails" class="btn-back">Back to List</a>
+=======
+
+            <div class="form-group form-actions-fix">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="ChemistGetDetails" class="btn btn-secondary">
+                    Back to List
+                </a>
+>>>>>>> Stashed changes
+            </div>
+        </form>
+    </div>
+</div>

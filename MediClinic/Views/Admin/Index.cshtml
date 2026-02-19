@@ -1,0 +1,79 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container-fluid mt-4">
+    <h3 class="mb-4 fw-bold text-secondary">Dashboard Overview</h3>
+
+    <div class="row g-4">
+
+        <!-- Card -->
+        <div class="col-md-3">
+            
+                <div class="dashboard-card bg-primary">
+                    <i class="fas fa-user-injured"></i>
+                    <h4>@ViewBag.TotalPatients</h4>
+                    <p>Total Patients</p>
+                </div>
+            
+        </div>
+
+
+        <div class="col-md-3">
+            <div class="dashboard-card bg-success">
+                <i class="fas fa-user-md"></i>
+                <h4>@ViewBag.TotalPhysicians</h4>
+                <p>Total Physicians</p>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="dashboard-card bg-warning">
+                <i class="fas fa-capsules"></i>
+                <h4>@ViewBag.TotalChemists</h4>
+                <p>Total Chemists</p>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="dashboard-card bg-info">
+                <i class="fas fa-truck"></i>
+                <h4>@ViewBag.TotalSuppliers</h4>
+                <p>Total Suppliers</p>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="dashboard-card bg-secondary">
+                <i class="fas fa-calendar-check"></i>
+                <h4>@ViewBag.TotalAppointments</h4>
+                <p>Total Appointments</p>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="dashboard-card bg-dark">
+                <i class="fas fa-clock"></i>
+                <h4>@ViewBag.TotalSchedules</h4>
+                <p>Total Schedules</p>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="dashboard-card bg-danger">
+                <i class="fas fa-user-clock"></i>
+                <h4>@ViewBag.PendingPatientsCount</h4>
+                <p>Pending Patients</p>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="dashboard-card bg-warning">
+                <i class="fas fa-exclamation-circle"></i>
+                <h4>@ViewBag.PendingSchedulesCount</h4>
+                <p>Pending Schedules</p>
+            </div>
+        </div>
+
+    </div>
+</div>

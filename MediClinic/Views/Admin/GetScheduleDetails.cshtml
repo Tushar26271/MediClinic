@@ -1,0 +1,62 @@
+﻿@model IEnumerable<MediClinic.Models.Schedule>
+
+
+
+@{
+    ViewData["Title"] = "GetScheduleDetails";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="admin-card">
+    <div class="table-header">
+        <h4 class="page-title">Schedule Management</h4>
+        
+    </div>
+</div>
+<div class="table-responsive">
+    <table class="admin-table">
+        <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ScheduleDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ScheduleTime)
+            </th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.Appointment.Patient.PatientName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Physician.PhysicianName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ScheduleDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ScheduleTime)
+            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Appointment.Patient.PatientName)
+                </td>
+
+            
+            <td>
+                    @Html.DisplayFor(modelItem => item.Physician.PhysicianName)
+            </td>
+            @* <td>
+                <a asp-action="Edit" asp-route-id="@item.ScheduleId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ScheduleId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ScheduleId">Delete</a>
+            </td> *@
+        </tr>
+}
+    </tbody>
+</table>
+</div>

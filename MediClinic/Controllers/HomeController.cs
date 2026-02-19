@@ -1,7 +1,7 @@
-using System.Diagnostics;
 using MediClinic.Models;
-using Microsoft.AspNetCore.Mvc;
 
+using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 namespace MediClinic.Controllers
 {
     public class HomeController : Controller
@@ -10,11 +10,13 @@ namespace MediClinic.Controllers
         {
             return View();
         }
+        
 
         public IActionResult Privacy()
         {
             return View();
         }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

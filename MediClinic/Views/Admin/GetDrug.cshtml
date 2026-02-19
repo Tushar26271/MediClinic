@@ -1,0 +1,60 @@
+﻿@model IEnumerable<MediClinic.Models.Drug>
+
+@{
+    ViewData["Title"] = "GetDrugs";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1>GetDrugs</h1>
+
+<p>
+    <a asp-action="CreateDrug">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DrugTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Expiry)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dosage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DrugStatus)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DrugTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Expiry)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dosage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DrugStatus)
+            </td>
+            <td>
+                    <a class="btn btn-edit" asp-action="EditDrug" asp-route-id="@item.DrugId">Edit</a> |
+                    <a class="btn btn-details" asp-action="GetDrugById" asp-route-id="@item.DrugId">Details</a> |
+                    <a class="btn btn-delete" asp-action="DeleteDrug" asp-route-id="@item.DrugId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

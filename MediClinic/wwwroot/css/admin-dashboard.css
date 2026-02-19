@@ -1,0 +1,124 @@
+﻿
+
+
+
+    
+
+
+
+body {
+    margin: 0;
+    background: #f4f7fa;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.navbar {
+    height: 60px;
+    z-index: 1050;
+    position: fixed;
+    width: 100%;
+}
+
+
+
+/* Layout Wrapper */
+.layout-wrapper {
+    display: flex;
+    margin-top: 60px; /* navbar height */
+    min-height: calc(100vh - 60px);
+}
+
+
+
+
+.sidebar {
+    width: 240px;
+    height: calc(100vh - 60px);
+    background: #1e2a38;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    padding-top: 20px;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+
+
+
+    
+    .sidebar.collapsed {
+        width: 70px;
+    }
+
+    .sidebar .nav-link {
+        color: #cfd8dc;
+        padding: 12px 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+
+
+        .sidebar .nav-link:hover {
+            background: #2f3e50;
+            color: #fff;
+        }
+
+    .sidebar.collapsed {
+        width: 70px;
+    }
+
+.main-content {
+    flex: 1;
+    margin-left: 240px;
+    margin-top: 60px;
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+
+
+.main-content.expanded {
+    margin-left: 70px;
+}
+
+
+
+    .main-content.expanded {
+        margin-left: 70px;
+    }
+
+.dashboard-card {
+    padding: 20px;
+    border-radius: 15px;
+    color: white;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    transition: 0.3s;
+}
+
+    .dashboard-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .dashboard-card i {
+        font-size: 28px;
+        margin-bottom: 10px;
+    }
+
+.notification-badge {
+    position: absolute;
+    top: 5px;
+    right: 0;
+    font-size: 10px;
+}
+.dashboard-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+    .dashboard-link:hover .dashboard-card {
+        transform: translateY(-5px);
+        transition: 0.3s ease;
+    }

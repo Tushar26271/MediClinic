@@ -1,0 +1,114 @@
+﻿@model IEnumerable<MediClinic.Models.Schedule>
+
+@{
+    ViewData["Title"] = "My Schedule";
+    Layout = "~/Views/Shared/_PhysicianLayout.cshtml";
+}
+
+<div class="card shadow-sm border-0 rounded-4">
+    <div class="card-body p-4">
+
+        <h4 class="fw-bold mb-3">My Schedule</h4>
+
+        @if (Model == null || !Model.Any())
+        {
+            <div class="alert alert-info">
+                No schedules available.
+            </div>
+        }
+        else
+        {
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+
+                    <thead class="table-light">
+                        <tr>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Patient</th>
+                            <th>Status</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+
+                                <!-- DATE -->
+                                <td>
+                                    @item.ScheduleDate
+                                </td>
+
+                                <!-- TIME -->
+                                <td>
+                                    @item.ScheduleTime
+                                </td>
+
+                                <!-- PATIENT -->
+                                <td>
+                                    @item.Appointment?.Patient?.PatientName 
+                                </td>
+
+                                <!-- STATUS -->
+                                <td>
+                                    @if (item.ScheduleStatus == "Scheduled")
+                                    {
+                                        <span class="badge bg-warning text-dark">
+                                            Scheduled
+                                        </span>
+                                    }
+                                    else if (item.ScheduleStatus == "Completed")
+                                    {
+                                        <span class="badge bg-success">
+                                            Completed
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-secondary">
+                                            @item.ScheduleStatus
+                                        </span>
+                                    }
+                                </td>
+
+                                <!-- ACTIONS -->
+                                <td class="text-center">
+
+                                    <a asp-action="PatientRecords"
+                                       asp-route-id="@item.Appointment?.PatientId"
+                                       class="btn btn-sm btn-outline-secondary me-1">
+                                        Records
+                                    </a>
+
+                                    @if (item.ScheduleStatus == "Scheduled")
+                                    {
+                                        <a asp-action="AddAdvice"
+                                           asp-route-id="@item.ScheduleId"
+                                           class="btn btn-sm btn-success me-1">
+                                            Add Advice
+                                        </a>
+                                    }
+
+                                    @if (item.ScheduleStatus == "Completed")
+                                    {
+                                        <a asp-action="ViewAdvice"
+                                           asp-route-id="@item.ScheduleId"
+                                           class="btn btn-sm btn-primary">
+                                            View Advice
+                                        </a>
+                                    }
+
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+            </div>
+        }
+
+    </div>
+</div>

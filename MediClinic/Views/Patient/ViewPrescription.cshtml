@@ -1,0 +1,14 @@
+﻿@model IEnumerable<MediClinic.Models.PhysicianPrescrip>
+
+<h3>Prescription</h3>
+
+@foreach (var item in Model)
+{
+    <dl class="row">
+        <dt class="col-sm-2">Prescription</dt>
+        <dd class="col-sm-10">@item.Prescription</dd>
+
+        <dt class="col-sm-2">Dosage</dt>
+        <dd class="col-sm-10">@item.Dosage</dd>
+    </dl>
+}

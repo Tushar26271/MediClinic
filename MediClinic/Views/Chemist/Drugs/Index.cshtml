@@ -1,0 +1,42 @@
+﻿@model IEnumerable<MediClinic.Models.Drug>
+@{
+    ViewData["Title"] = "Drugs";
+    Layout = "~/Views/Shared/_LayoutChemist.cshtml";
+}
+
+<div class="d-flex justify-content-between mb-3">
+    <h3>Drug Inventory</h3>
+    <a asp-action="CreateDrug" class="btn btn-primary">+ Add Drug</a>
+</div>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Title</th>
+            <th>Dosage</th>
+            <th>Expiry</th>
+            <th>Status</th>
+            <th width="180">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.DrugTitle</td>
+                <td>@item.Dosage</td>
+                <td>@item.Expiry?.ToShortDateString()</td>
+                <td>
+                    <span class="badge bg-@(item.DrugStatus == "Active" ? "success" : "secondary")">
+                        @item.DrugStatus
+                    </span>
+                </td>
+                <td>
+                    <a asp-action="EditDrug" asp-route-id="@item.DrugId" class="btn btn-warning btn-sm">Edit</a>
+                    <a asp-action="DeleteDrug" asp-route-id="@item.DrugId" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

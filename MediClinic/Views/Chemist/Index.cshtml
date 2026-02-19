@@ -1,0 +1,34 @@
+﻿@model MediClinic.Models.ChemistViewModel.DashboardVM
+@{
+    Layout = "~/Views/Shared/_LayoutChemist.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="card bg-info text-white p-3">
+            <h4>Total Drugs</h4>
+            <h2>@Model.TotalDrugs</h2>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card bg-success text-white p-3">
+            <h4>Active Drugs</h4>
+            <h2>@Model.ActiveDrugs</h2>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card bg-warning text-dark p-3">
+            <h4>Pending Requests</h4>
+            <h2>@Model.PendingRequests</h2>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card bg-secondary text-white p-3">
+            <h4>Total POs</h4>
+            <h2>@Model.TotalPO</h2>
+        </div>
+    </div>
+</div>

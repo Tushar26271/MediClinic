@@ -1,0 +1,29 @@
+﻿@model IEnumerable<MediClinic.Models.PurchaseOrderHeader>
+@{
+    Layout = "~/Views/Shared/_LayoutSupplier.cshtml";
+}
+
+<h3>Assigned Purchase Orders</h3>
+
+<table class="table table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>PO No</th>
+            <th>Date</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var po in Model)
+        {
+            <tr>
+                <td>@po.Pono</td>
+                <td>@po.Podate?.ToString("dd-MMM-yyyy")</td>
+                <td>
+                    <a asp-action="PODetails" asp-route-id="@po.Poid"
+                       class="btn btn-info btn-sm">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

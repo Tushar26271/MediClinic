@@ -1,0 +1,22 @@
+﻿@model MediClinic.Models.Chemist
+@{
+    Layout = "~/Views/Shared/_LayoutChemist.cshtml";
+}
+
+<h3>My Profile</h3>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Success"]
+    </div>
+}
+
+<div class="card p-3">
+    <p><strong>Name:</strong> @Model.ChemistName</p>
+    <p><strong>Email:</strong> @Model.Email</p>
+    <p><strong>Phone:</strong> @Model.Phone</p>
+    <p><strong>Address:</strong> @Model.Address</p>
+
+    <a asp-action="EditProfile" class="btn btn-primary">Edit Profile</a>
+</div>

@@ -1,0 +1,33 @@
+﻿@model MediClinic.Models.Supplier
+@{
+    Layout = "~/Views/Shared/_LayoutSupplier.cshtml";
+}
+
+<h3>Edit Profile</h3>
+
+<form asp-action="EditProfile" method="post">
+    <input type="hidden" asp-for="SupplierId" />
+
+    <div class="mb-3">
+        <label asp-for="SupplierName"></label>
+        <input asp-for="SupplierName" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Phone"></label>
+        <input asp-for="Phone" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Address"></label>
+        <textarea asp-for="Address" class="form-control"></textarea>
+    </div>
+
+    <button class="btn btn-success">Update</button>
+    <a asp-action="Profile" class="btn btn-secondary">Cancel</a>
+</form>

@@ -1,0 +1,66 @@
+﻿@model IEnumerable<MediClinic.Models.Appointment>
+
+@{
+    ViewData["Title"] = "GetAppointmentDetailsByIdFromPatient";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1>GetAppointmentDetailsByIdFromPatient</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AppointmentDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Criticality)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reason)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Note)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ScheduleStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Patient)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AppointmentDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Criticality)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Reason)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Note)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ScheduleStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Patient.Address)
+            </td>
+            <td>
+                    <a asp-controller="Admin" asp-action="Schedule">Schedule</a>
+
+                    <a asp-action="GetAppointmentDetails">Back to List</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,16 @@
+﻿@model MediClinic.Models.Supplier
+@{
+    Layout = "~/Views/Shared/_LayoutSupplier.cshtml";
+}
+
+<h3>Supplier Profile</h3>
+
+<div class="card p-4">
+    <p><strong>Name:</strong> @Model.SupplierName</p>
+    <p><strong>Email:</strong> @Model.Email</p>
+    <p><strong>Phone:</strong> @Model.Phone</p>
+    <p><strong>Address:</strong> @Model.Address</p>
+    <p><strong>Status:</strong> @Model.SupplierStatus</p>
+
+    <a asp-action="EditProfile" class="btn btn-primary">Edit Profile</a>
+</div>

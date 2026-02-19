@@ -1,0 +1,16 @@
+﻿@model MediClinic.Models.Drug
+@{
+    Layout = "~/Views/Shared/_LayoutChemist.cshtml";
+}
+
+<h3 class="text-danger">Delete Drug</h3>
+
+<div class="alert alert-warning">
+    Are you sure you want to delete <strong>@Model.DrugTitle</strong>?
+</div>
+
+<form asp-action="DeleteDrug" method="post">
+    <input type="hidden" asp-for="DrugId" />
+    <button class="btn btn-danger">Confirm Delete</button>
+    <a asp-action="Drugs" class="btn btn-secondary">Cancel</a>
+</form>

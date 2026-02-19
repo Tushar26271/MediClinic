@@ -1,0 +1,42 @@
+﻿@model MediClinic.ViewModels.SupplierDashboardVM
+@{
+    Layout = "~/Views/Shared/_LayoutSupplier.cshtml";
+}
+
+<h3>Welcome, @Model.SupplierName</h3>
+
+<div class="row mt-4">
+
+    <div class="col-md-4">
+        <div class="card bg-primary text-white p-3">
+            <h5>Total Assigned POs</h5>
+            <h2>@Model.TotalAssignedPO</h2>
+        </div>
+    </div>
+
+</div>
+
+<h5 class="mt-4">Recent Purchase Orders</h5>
+
+<table class="table table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>PO No</th>
+            <th>Date</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var po in Model.RecentPO)
+        {
+            <tr>
+                <td>@po.Pono</td>
+                <td>@po.Podate?.ToString("dd-MMM-yyyy")</td>
+                <td>
+                    <a asp-action="PODetails" asp-route-id="@po.Poid"
+                       class="btn btn-info btn-sm">View</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

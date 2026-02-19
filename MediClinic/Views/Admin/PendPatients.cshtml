@@ -1,0 +1,52 @@
+﻿
+@model IEnumerable<MediClinic.Models.Patient>
+@{
+    ViewData["Title"] = "pendingPatients";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="admin-card">
+    <div class="table-header">
+        <h3>Pending Patients</h3>
+</div>
+
+        
+    </div>
+
+<table class="admin-table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+               
+                    <td>
+                        
+                    @item.PatientName
+                    </td>
+                
+                <td>@item.Email</td>
+                <td>@item.Phone</td>
+                <td>
+                    <a asp-action="Approve"
+                       asp-route-id="@item.PatientId"
+                       class="btn btn-success btn-sm">
+                        Approve
+                    </a>
+
+                    <a asp-action="Deny"
+                       asp-route-id="@item.PatientId"
+                       class="btn btn-danger btn-sm">
+                        Deny
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

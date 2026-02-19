@@ -1,0 +1,147 @@
+﻿@using MediClinic.Models
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - MediClinic Physician</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
+
+    <style>
+        body {
+            margin: 0;
+            background: #eef2f7;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .sidebar {
+            width: 260px;
+            height: 100vh;
+            position: fixed;
+            background: linear-gradient(180deg,#0f172a,#1e293b);
+            padding-top: 30px;
+            color: white;
+        }
+
+            .sidebar h4 {
+                text-align: center;
+                margin-bottom: 35px;
+                font-weight: 600;
+            }
+
+            .sidebar a {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                padding: 12px 20px;
+                margin: 8px 15px;
+                border-radius: 12px;
+                text-decoration: none;
+                color: #cbd5e1;
+                transition: 0.3s;
+            }
+
+                .sidebar a:hover {
+                    background: #2563eb;
+                    color: white;
+                    transform: translateX(5px);
+                }
+
+        .sidebar-footer {
+            position: absolute;
+            bottom: 25px;
+            width: 100%;
+            padding: 0 20px;
+        }
+
+        .logout-link {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 12px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 500;
+            color: #f87171;
+            background: rgba(248,113,113,0.1);
+            transition: 0.3s;
+        }
+
+            .logout-link:hover {
+                background: #ef4444;
+                color: white;
+            }
+
+        .main-content {
+            margin-left: 270px;
+            padding: 35px;
+        }
+
+        .topbar {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+
+        .profile-circle {
+            width: 45px;
+            height: 45px;
+            background: #2563eb;
+            color: white;
+            font-weight: 600;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h4>MediClinic Physician</h4>
+
+        <a asp-controller="Physician" asp-action="Index">
+            <i class="bi bi-speedometer2"></i> Dashboard
+        </a>
+
+        <a asp-controller="Physician" asp-action="ViewSchedule">
+            <i class="bi bi-calendar-check"></i> My Schedule
+        </a>
+
+        <a asp-controller="Physician" asp-action="DrugRequest">
+            <i class="bi bi-capsule"></i> Drug Request
+        </a>
+
+        <div class="sidebar-footer">
+            <a asp-controller="CrediMgr"
+               asp-action="Logout"
+               class="logout-link">
+                <i class="bi bi-box-arrow-right me-2"></i> Logout
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+
+        <!-- Top Welcome Bar -->
+        @RenderBody()
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+﻿@model MediClinic.Models.Patient
+
+@{
+    ViewData["Title"] = "EditPatient";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="admin-form-wrapper">
+    <div class="admin-form-card">
+        <h4 class="form-title"><center>Edit Patient</center></h4>
+        <form asp-action="EditPatient">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="PatientId" />
+            <div class="form-group">
+                <label asp-for="PatientName" class="control-label"></label>
+                <input asp-for="PatientName" class="form-control" />
+                <span asp-validation-for="PatientName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Dob" class="control-label"></label>
+                <input asp-for="Dob" class="form-control" />
+                <span asp-validation-for="Dob" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Gender" class="control-label">Gender</label>
+                <div>
+                    <input type="radio" asp-for="Gender" value="Male" /> Male
+                    <input type="radio" asp-for="Gender" value="Female" /> Female
+                    <input type="radio" asp-for="Gender" value="Other" /> Other
+                </div>
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Phone" class="control-label"></label>
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Summary" class="control-label"></label>
+                <input asp-for="Summary" class="form-control" />
+                <span asp-validation-for="Summary" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label d-block">Patient Status</label>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio"
+                           asp-for="PatientStatus" value="Pending" />
+                    <label class="form-check-label">Pending</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio"
+                           asp-for="PatientStatus" value="Active" />
+                    <label class="form-check-label">Active</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio"
+                           asp-for="PatientStatus" value="Inactive" />
+                    <label class="form-check-label">Inactive</label>
+                </div>
+
+                <span asp-validation-for="PatientStatus" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <a asp-action="PatientGetDetails" class="btn-back">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+

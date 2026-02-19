@@ -1,0 +1,41 @@
+﻿@model MediClinic.Models.Drug
+@{
+    Layout = "~/Views/Shared/_LayoutChemist.cshtml";
+}
+
+<h3>Edit Drug</h3>
+
+<form asp-action="EditDrug" method="post">
+    <input type="hidden" asp-for="DrugId" />
+
+    <div class="mb-3">
+        <label>Drug Title</label>
+        <input asp-for="DrugTitle" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Description</label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label>Dosage</label>
+        <input asp-for="Dosage" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Expiry</label>
+        <input asp-for="Expiry" type="date" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Status</label>
+        <select asp-for="DrugStatus" class="form-select">
+            <option>Active</option>
+            <option>Inactive</option>
+        </select>
+    </div>
+
+    <button class="btn btn-primary">Update</button>
+    <a asp-action="Drugs" class="btn btn-secondary">Back</a>
+</form>

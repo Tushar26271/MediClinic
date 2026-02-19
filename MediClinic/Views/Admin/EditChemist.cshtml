@@ -1,0 +1,73 @@
+﻿@model MediClinic.Models.Chemist
+
+@{
+    ViewData["Title"] = "EditChemist";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+<div class="admin-form-wrapper">
+    <div class="admin-form-card">
+        <h4 class="form-title"><center>Edit Chemist</center></h4>
+        <form asp-action="EditChemist">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ChemistId" />
+            <div class="form-group">
+                <label asp-for="ChemistName" class="control-label"></label>
+                <input asp-for="ChemistName" class="form-control" />
+                <span asp-validation-for="ChemistName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Phone" class="control-label"></label>
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Summary" class="control-label"></label>
+                <input asp-for="Summary" class="form-control" />
+                <span asp-validation-for="Summary" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label d-block">Chemist Status</label>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio"
+                           asp-for="ChemistStatus" value="Pending" />
+                    <label class="form-check-label">Pending</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio"
+                           asp-for="ChemistStatus" value="Active" />
+                    <label class="form-check-label">Active</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio"
+                           asp-for="ChemistStatus" value="Inactive" />
+                    <label class="form-check-label">Inactive</label>
+                </div>
+
+                <span asp-validation-for="ChemistStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <a asp-action="ChemistGetDetails" class="btn-back">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+

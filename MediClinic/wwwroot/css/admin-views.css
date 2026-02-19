@@ -1,0 +1,496 @@
+﻿/* =========================================
+   GLOBAL PAGE STYLING
+========================================= */
+
+body {
+    background-color: #f4f7fa;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.page-header {
+    margin-bottom: 20px;
+}
+
+.page-title {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+/* =========================================
+   BREADCRUMB
+========================================= */
+
+.breadcrumb {
+    background: transparent;
+    margin-bottom: 0;
+    font-size: 14px;
+}
+
+.breadcrumb-item a {
+    text-decoration: none;
+    color: #0d6efd;
+}
+
+.breadcrumb-item.active {
+    color: #6c757d;
+}
+
+/* =========================================
+   ADMIN CARD CONTAINER
+========================================= */
+
+.admin-card {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    transition: 0.3s ease;
+}
+
+    .admin-card:hover {
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    }
+
+/* =========================================
+   HEADER ACTION SECTION
+========================================= */
+
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+    .table-header .search-box {
+        max-width: 250px;
+    }
+
+    .table-header input {
+        border-radius: 8px;
+    }
+
+/* =========================================
+   TABLE DESIGN
+========================================= */
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .admin-table thead {
+        background-color: #1e2a38;
+        color: #ffffff;
+    }
+
+    .admin-table th {
+        padding: 12px;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .admin-table td {
+        padding: 12px;
+        vertical-align: middle;
+        font-size: 14px;
+        color: #333;
+        border-bottom: 1px solid #eee;
+    }
+
+    .admin-table tbody tr {
+        transition: all 0.2s ease-in-out;
+    }
+
+        .admin-table tbody tr:hover {
+            background-color: #f1f7ff;
+        }
+
+/* Responsive table wrapper */
+.table-responsive {
+    border-radius: 10px;
+    overflow-x: auto;
+}
+
+/* =========================================
+   STATUS BADGES
+========================================= */
+
+.badge-active {
+    background-color: #198754;
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.badge-inactive {
+    background-color: #dc3545;
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.badge-pending {
+    background-color: #ffc107;
+    color: #000;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+/* =========================================
+   BUTTON STYLING
+   MINIMAL WARM ACTION BUTTONS
+========================================= */
+
+.btn-action {
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    border: none;
+    transition: all 0.2s ease;
+    font-weight: 500;
+}
+
+/* ✏ Edit - Soft Amber */
+.btn-edit {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.btn-edit:hover {
+    background-color: #ffe69c;
+    color: #664d03;
+}
+
+/* 🔎 Details - Soft Cool Gray */
+.btn-details {
+    background-color: #eef2f7;
+    color: #495057;
+}
+
+.btn-details:hover {
+    background-color: #dde2e8;
+    color: #212529;
+}
+
+/* 🗑 Delete - Soft Coral */
+.btn-delete {
+    background-color: #fde2e1;
+    color: #842029;
+}
+
+.btn-delete:hover {
+    background-color: #f8c9c6;
+    color: #5c1a1f;
+}
+.btn-create {
+    background-color: #0d6efd;
+    color: #fff;
+    border: none;
+}
+
+    .btn-create:hover {
+        background-color: #0b5ed7;
+    }
+
+/* =========================================
+   PAGINATION
+========================================= */
+
+.pagination {
+    margin-top: 20px;
+}
+
+.page-link {
+    border-radius: 6px;
+    margin: 0 3px;
+    color: #0d6efd;
+}
+
+.page-item.active .page-link {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+/* =========================================
+   RESPONSIVE TWEAKS
+============================*/
+
+    .admin-table td a {
+    color: #333 !important;
+    text-decoration: none !important;
+}
+
+.admin-table td a:hover {
+    color: #0d6efd;
+    text-decoration: none;
+}
+
+/* =========================================
+   ADMIN FORM DESIGN
+========================================= */
+
+.form-container {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 14px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+    max-width: 650px;
+}
+
+.form-title {
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+/* Form Groups */
+.form-group {
+    margin-bottom: 18px;
+}
+
+/* Labels */
+.form-label,
+.control-label {
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: #495057;
+}
+
+/* Inputs */
+.form-control {
+    border-radius: 10px;
+    border: 1px solid #dee2e6;
+    padding: 10px 14px;
+    transition: all 0.2s ease;
+    box-shadow: none;
+}
+
+    .form-control:focus {
+        border-color: #86b7fe;
+        box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.15);
+    }
+
+/* Validation Errors */
+.text-danger {
+    font-size: 13px;
+}
+
+/* =========================================
+   FORM BUTTONS
+========================================= */
+
+.btn-submit {
+    background-color: #e3f2fd;
+    color: #0d6efd;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: 0.2s ease;
+}
+
+    .btn-submit:hover {
+        background-color: #d0e7ff;
+        color: #084298;
+    }
+
+/* Back Button */
+.btn-back {
+    background-color: #f8f9fa;
+    color: #495057;
+    padding: 8px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+    .btn-back:hover {
+        background-color: #e2e6ea;
+        color: #212529;
+        text-decoration: none;
+    }
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 768px) {
+    .form-container {
+        padding: 20px;
+        max-width: 100%;
+    }
+}
+/* =========================================
+   CENTER WRAPPER
+========================================= */
+.admin-form-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+/* =========================================
+   CARD
+========================================= */
+.admin-form-card {
+    width: 100%;
+    max-width: 750px;
+    background: #ffffff;
+    padding: 35px 45px;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+}
+
+    /* Title */
+    .admin-form-card h1 {
+        text-align: center;
+        font-size: 24px;
+        margin-bottom: 30px;
+        font-weight: 600;
+        color: #2c3e50;
+    }
+
+/* Details List Layout */
+.details-list {
+    width: 100%;
+}
+
+    /* Each Row Alignment */
+    .details-list dt,
+    .details-list dd {
+        padding: 14px 0;
+        margin: 0;
+    }
+/* Force proper alignment */
+.details-list {
+    display: grid;
+    grid-template-columns: 220px 1fr; /* Label width | Value auto */
+    row-gap: 8px;
+}
+
+    /* Force label + value in ONE LINE */
+    .details-list .row {
+        display: flex;
+        align-items: center;
+    }
+
+    /* Label Styling */
+    .details-list dt {
+        font-weight: 600;
+        color: #34495e;
+    }
+
+    /* Value Styling */
+    .details-list dd {
+        color: #555;
+    }
+
+    /* Add colon automatically */
+    .details-list dt::after {
+        
+        margin-left: 6px;
+    }
+
+    /* Spacing Between Rows */
+    .details-list dt:not(:first-child),
+    .details-list dd:not(:first-child) {
+        border-top: 1px solid #f0f0f0;
+    }
+
+/* Buttons */
+.admin-form-card .btn {
+    margin-top: 20px;
+    margin-right: 10px;
+}
+
+.btn-back {
+    text-decoration: none;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+    .btn-back:hover {
+        text-decoration: underline;
+    }
+
+/* Responsive */
+@media (max-width: 768px) {
+
+    .admin-form-card {
+        padding: 25px 20px;
+    }
+
+    .details-list dt,
+    .details-list dd {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    .details-list dt {
+        margin-bottom: 4px;
+    }
+}
+
+/* =========================================
+   GET DETAILS ACTION BUTTONS
+========================================= */
+
+.details-actions {
+    margin-top: 30px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+/* Common button style */
+.details-btn {
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    display: inline-block;
+}
+
+/* EDIT BUTTON (Soft Warm Tone) */
+.details-btn-edit {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeeba;
+}
+
+    .details-btn-edit:hover {
+        background-color: #ffe69c;
+    }
+
+/* BACK BUTTON (Minimal Gray) */
+.details-btn-back {
+    background-color: #f8f9fa;
+    color: #495057;
+    border: 1px solid #dee2e6;
+}
+
+    .details-btn-back:hover {
+        background-color: #e2e6ea;
+    }
+/* =========================================
+   DELETE BUTTON
+========================================= */
+
+.details-btn-delete {
+    background-color: #dc3545; /* Bootstrap danger red */
+    color: #ffffff; /* White text */
+    border: 1px solid #dc3545;
+}
+
+    .details-btn-delete:hover {
+        background-color: #bb2d3b; /* Darker red on hover */
+        border-color: #b02a37;
+    }
+

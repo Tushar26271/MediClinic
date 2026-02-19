@@ -1,0 +1,36 @@
+﻿@model MediClinic.Models.Chemist
+@{
+    Layout = "~/Views/Shared/_LayoutChemist.cshtml";
+}
+
+<h3>Edit Profile</h3>
+
+<form asp-action="EditProfile" method="post">
+    <input type="hidden" asp-for="ChemistId" />
+
+    <div class="mb-3">
+        <label>Name</label>
+        <input asp-for="ChemistName" class="form-control" />
+        <span asp-validation-for="ChemistName" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label>Email</label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label>Phone</label>
+        <input asp-for="Phone" class="form-control" />
+        <span asp-validation-for="Phone" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label>Address</label>
+        <textarea asp-for="Address" class="form-control"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-success">Update</button>
+    <a asp-action="Profile" class="btn btn-secondary">Cancel</a>
+</form>

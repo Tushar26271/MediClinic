@@ -1,0 +1,35 @@
+﻿@model MediClinic.Models.PurchaseOrderHeader
+@{
+    Layout = "~/Views/Shared/_LayoutSupplier.cshtml";
+}
+
+<h3>Purchase Order Details</h3>
+
+<div class="card p-3 mb-3">
+    <strong>PO No:</strong> @Model.Pono <br />
+    <strong>Date:</strong> @Model.Podate?.ToString("dd-MMM-yyyy")
+</div>
+
+<table class="table table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>Sl No</th>
+            <th>Drug</th>
+            <th>Quantity</th>
+            <th>Note</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.PurchaseProductLines)
+        {
+            <tr>
+                <td>@item.SlNo</td>
+                <td>@item.Drug?.DrugTitle</td>
+                <td>@item.Qty</td>
+                <td>@item.Note</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="PurchaseOrders" class="btn btn-secondary">Back</a>

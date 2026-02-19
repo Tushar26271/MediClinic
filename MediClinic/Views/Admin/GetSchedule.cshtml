@@ -1,0 +1,59 @@
+﻿@model IEnumerable<MediClinic.Models.Schedule>
+
+@{
+    ViewData["Title"] = "GetSchedule";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1>GetSchedule</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ScheduleDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ScheduleTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ScheduleStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Appointment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Physician)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ScheduleDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ScheduleTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ScheduleStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Appointment.AppointmentId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Physician.Address)
+            </td>
+            <td>
+                    <a class="btn btn-details" asp-action="GetScheduleById" asp-route-id="@item.ScheduleId">Details</a> |
+                
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
