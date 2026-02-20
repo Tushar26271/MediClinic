@@ -1,36 +1,285 @@
 ﻿@model MediClinic.Models.ViewModel.LoginViewModel
 @{
     ViewData["Title"] = "Login";
+    
 }
 
-<h1>Login</h1>
+<style>
+    /* ---------- Global Styles & Animated Background ---------- */
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', Roboto, sans-serif;
+        background: linear-gradient(-45deg, #0b3b5c, #1b7e9f, #2aa9c9, #a2e0f0);
+        background-size: 400% 400%;
+        animation: bgShift 12s ease infinite;
+        overflow: hidden;
+    }
 
-<h4>LoginViewModel</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Login" asp-controller="Credimgr">
+    @@keyframes bgShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
 
-            <IBM-tag-helper id="demo" name="Ganesh"></IBM-tag-helper>
+    /* ---------- 3D Perspective Container ---------- */
+    .wrapper-3d {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        perspective: 1200px;
+    }
 
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="UserName" class="control-label"></label>
-                <input asp-for="UserName" class="form-control" />
-                <span asp-validation-for="UserName" class="text-danger"></span>
+    /* ---------- Main Card with 3D Tilt ---------- */
+    .login-container {
+        display: flex;
+        width: 850px;
+        max-width: 90vw;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(12px);
+        border-radius: 40px;
+        box-shadow: 0 40px 70px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.2);
+        transform: rotateY(2deg) rotateX(1deg) translateZ(20px);
+        transition: transform 0.4s ease;
+        animation: floatIn 1s ease-out;
+    }
+
+    .login-container:hover {
+        transform: rotateY(0deg) rotateX(0deg) translateZ(30px);
+        box-shadow: 0 50px 90px rgba(0, 0, 0, 0.4);
+    }
+
+    @@keyframes floatIn {
+        0% { opacity: 0; transform: rotateY(10deg) rotateX(5deg) translateY(50px) translateZ(-50px); }
+        100% { opacity: 1; transform: rotateY(2deg) rotateX(1deg) translateY(0) translateZ(20px); }
+    }
+
+    /* ---------- Left Panel: 3D Branding & Illustration ---------- */
+    .brand-panel {
+        flex: 1;
+        background: linear-gradient(145deg, #0a2f44, #0e4b62);
+        border-radius: 40px 0 0 40px;
+        padding: 40px 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        text-align: center;
+        box-shadow: inset -5px -5px 15px rgba(0,0,0,0.5), inset 5px 5px 15px rgba(255,255,255,0.1);
+        transform: translateZ(30px);
+    }
+
+    .brand-icon {
+        width: 200px;
+        height: 200px;
+        background: rgba(255,255,255,0.05);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 25px;
+        box-shadow: 0 20px 30px rgba(0,0,0,0.4), 0 0 0 2px rgba(255,255,255,0.15) inset;
+        transform: translateZ(40px);
+        transition: transform 0.3s;
+    }
+
+    .brand-icon i {
+        font-size: 120px;
+        color: #fff;
+        text-shadow: 0 10px 20px rgba(0,0,0,0.4);
+        transform: translateZ(15px);
+    }
+
+    .brand-panel h1 {
+        font-size: 3rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        margin: 10px 0 5px;
+        text-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        transform: translateZ(25px);
+    }
+
+    .brand-panel p {
+        font-size: 1.1rem;
+        opacity: 0.9;
+        transform: translateZ(15px);
+    }
+
+    /* 3D floating decoration */
+    .shape-3d {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        background: rgba(255,255,255,0.03);
+        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+        bottom: 20px;
+        left: 20px;
+        box-shadow: 0 15px 25px rgba(0,0,0,0.3);
+        transform: rotate(45deg) translateZ(-20px);
+        z-index: -1;
+    }
+
+    /* ---------- Right Panel: Login Form with 3D Depth ---------- */
+    .login-panel {
+        flex: 1;
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(15px);
+        border-radius: 0 40px 40px 0;
+        padding: 50px 40px;
+        box-shadow: -10px 10px 30px rgba(0,0,0,0.2), 0 0 0 1px rgba(255,255,255,0.7) inset;
+        transform: translateZ(25px);
+    }
+
+    .login-title {
+        font-size: 2.2rem;
+        font-weight: 600;
+        color: #0e4b62;
+        margin-bottom: 30px;
+        text-align: center;
+        text-shadow: 2px 2px 10px rgba(0,170,200,0.3);
+    }
+
+    .form-group {
+        margin-bottom: 25px;
+        transform-style: preserve-3d;
+    }
+
+    .form-group label {
+        font-weight: 500;
+        color: #1a3b4e;
+        margin-bottom: 8px;
+        display: block;
+        transform: translateZ(10px);
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 14px 18px;
+        border: none;
+        border-radius: 20px;
+        background: rgba(255,255,255,0.9);
+        box-shadow: 0 8px 15px rgba(0, 30, 50, 0.1), 0 2px 5px rgba(0,0,0,0.1), 0 0 0 1px rgba(255,255,255,0.8) inset;
+        font-size: 1rem;
+        transition: all 0.3s;
+        transform: translateZ(5px);
+    }
+
+    .form-control:focus {
+        outline: none;
+        box-shadow: 0 12px 25px rgba(0, 119, 182, 0.3), 0 0 0 2px #1b7e9f inset;
+        transform: translateZ(15px) scale(1.02);
+        background: white;
+    }
+
+    .btn-login {
+        width: 100%;
+        padding: 16px;
+        border: none;
+        border-radius: 40px;
+        background: linear-gradient(145deg, #0b4b6b, #1a7f9f);
+        color: white;
+        font-size: 1.2rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+        cursor: pointer;
+        box-shadow: 0 15px 25px rgba(0, 50, 80, 0.4), 0 5px 10px rgba(0,0,0,0.2), 0 -2px 5px rgba(255,255,255,0.3) inset;
+        transform: translateZ(20px);
+        transition: all 0.2s ease;
+        margin-top: 15px;
+    }
+
+    .btn-login:hover {
+        background: linear-gradient(145deg, #0d5f82, #2399bd);
+        transform: translateZ(30px) scale(1.02);
+        box-shadow: 0 22px 35px rgba(0, 100, 150, 0.5), 0 8px 15px rgba(0,0,0,0.3);
+    }
+
+    .btn-login:active {
+        transform: translateZ(10px) scale(0.98);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .validation-summary-errors, .text-danger {
+        color: #b22222;
+        font-size: 0.9rem;
+        margin-top: 5px;
+        transform: translateZ(8px);
+    }
+
+    .back-link {
+        display: block;
+        text-align: center;
+        margin-top: 25px;
+        color: #1b7e9f;
+        font-weight: 500;
+        text-decoration: none;
+        transform: translateZ(10px);
+        transition: 0.2s;
+    }
+
+    .back-link:hover {
+        color: #0c3b4f;
+        text-decoration: underline;
+        transform: translateZ(15px);
+    }
+
+    /* Responsive */
+    @@media (max-width: 700px) {
+        .login-container {
+            flex-direction: column;
+            transform: none;
+        }
+        .brand-panel {
+            border-radius: 40px 40px 0 0;
+            padding: 30px;
+        }
+        .login-panel {
+            border-radius: 0 0 40px 40px;
+        }
+    }
+
+    /* Font Awesome Icons (you can include via CDN in layout or here) */
+    @@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+</style>
+
+<div class="wrapper-3d">
+    <div class="login-container">
+        <!-- Left 3D Brand Panel -->
+        <div class="brand-panel">
+            <div class="brand-icon">
+                <i class="fas fa-heartbeat"></i> <!-- 3D heartbeat icon -->
             </div>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Login" class="btn btn-primary" />
-            </div>
-        </form>
+            <h1>WeHealth</h1>
+            <p>Your health, our passion</p>
+            <div class="shape-3d"></div>
+        </div>
+
+        <!-- Right Login Panel -->
+        <div class="login-panel">
+            <h2 class="login-title">Sign In</h2>
+            <form asp-action="Login" asp-controller="Credimgr" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label asp-for="UserName"></label>
+                    <input asp-for="UserName" class="form-control" placeholder="Enter username" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Password"></label>
+                    <input asp-for="Password" type="password" class="form-control" placeholder="••••••••" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn-login">Login</button>
+            </form>
+
+            <a asp-action="Index" class="back-link">← Back to Home</a>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+<!-- Include Font Awesome if not already in layout -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />

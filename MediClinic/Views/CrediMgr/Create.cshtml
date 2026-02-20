@@ -1,132 +1,381 @@
 ﻿@model MediClinic.Models.Patient
-
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create Patient";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
-
-<h4>Patient</h4>
-<hr />
 <style>
-    /* Page Background */
+    /* ---------- Global Styles & Animated Background ---------- */
+    /* ---------- Animated Gradient Background ---------- */
     body {
-        background: linear-gradient(to right, #e6f2ff, #ffffff);
-        font-family: 'Segoe UI', sans-serif;
+        margin: 0;
+        font-family: 'Segoe UI', Roboto, sans-serif;
+        background: linear-gradient(-45deg, #0b3b5c, #1b7e9f, #2aa9c9, #a2e0f0);
+        background-size: 400% 400%;
+        animation: bgShift 12s ease infinite;
+        overflow: hidden; /* Remove scroll */
     }
 
-    /* Card Design */
-    .form-container {
-        max-width: 600px;
-        margin: 50px auto;
+    @@keyframes bgShift {
+        0% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background-position: 0% 50%;
+        }
     }
 
-    .form-card {
-        background: #ffffff;
+    /* Floating animated bubbles */
+    body::before, body::after {
+        content: "";
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.08);
+        animation: floatBubble 8s infinite ease-in-out;
+        z-index: 0;
+    }
+
+    body::before {
+        width: 200px;
+        height: 200px;
+        top: 10%;
+        left: 5%;
+    }
+
+    body::after {
+        width: 150px;
+        height: 150px;
+        bottom: 10%;
+        right: 8%;
+        animation-delay: 3s;
+    }
+
+    @@keyframes floatBubble {
+        0%, 100% {
+            transform: translateY(0px);
+        }
+
+        50% {
+            transform: translateY(-25px);
+        }
+    }
+
+    /* ---------- Wrapper ---------- */
+    .wrapper-3d {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        perspective: 1400px;
+        padding: 10px;
+    }
+
+    /* ---------- Main Card ---------- */
+    .create-container {
+        display: flex;
+        width: 1000px;
+        max-width: 100%;
+        height: 88vh; /* force single screen */
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(15px);
+        border-radius: 35px;
+        box-shadow: 0 40px 70px rgba(0, 0, 0, 0.35);
+        animation: cardEntry 1s ease-out;
+        transition: transform 0.4s ease;
+    }
+
+    @@keyframes cardEntry {
+        from {
+            opacity: 0;
+            transform: rotateY(15deg) translateY(50px);
+        }
+
+        to {
+            opacity: 1;
+            transform: rotateY(0deg) translateY(0);
+        }
+    }
+
+    .create-container:hover {
+        transform: rotateY(3deg) rotateX(2deg);
+    }
+
+    /* ---------- Brand Panel ---------- */
+    .brand-panel {
+        flex: 1;
+        background: linear-gradient(145deg, #0a2f44, #0e4b62);
+        border-radius: 35px 0 0 35px;
         padding: 30px;
-        border-radius: 15px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        text-align: center;
+        animation: fadeInLeft 1.2s ease;
     }
 
-    /* Title Styling */
+    @@keyframes fadeInLeft {
+        from {
+            opacity: 0;
+            transform: translateX(-60px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    .brand-icon {
+        width: 160px;
+        height: 160px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.07);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+        animation: pulse 3s infinite;
+    }
+
+        .brand-icon i {
+            font-size: 90px;
+        }
+
+    @@keyframes pulse {
+        0%, 100% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.08);
+        }
+    }
+
+    .brand-panel h1 {
+        font-size: 2.5rem;
+        margin-bottom: 8px;
+    }
+
+    .brand-panel p {
+        font-size: 1rem;
+        opacity: 0.9;
+    }
+
+    /* ---------- Form Panel ---------- */
+    .form-panel {
+        flex: 1.5;
+        background: rgba(255, 255, 255, 0.92);
+        border-radius: 0 35px 35px 0;
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        animation: fadeInRight 1.2s ease;
+    }
+
+    @@keyframes fadeInRight {
+        from {
+            opacity: 0;
+            transform: translateX(60px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
     .form-title {
         text-align: center;
-        color: #0077b6;
-        font-weight: 600;
-        margin-bottom: 25px;
+        font-size: 1.9rem;
+        margin-bottom: 20px;
+        color: #0e4b62;
     }
 
-    /* Input Styling */
+    /* Compact grid for single screen */
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+
     .form-control {
-        border-radius: 8px;
-        border: 1px solid #ced4da;
-        transition: 0.3s;
+        padding: 10px 14px;
+        border-radius: 12px;
+        border: none;
+        background: #f5fbff;
+        transition: all 0.3s ease;
     }
 
         .form-control:focus {
-            border-color: #0077b6;
-            box-shadow: 0 0 8px rgba(0, 119, 182, 0.3);
+            outline: none;
+            background: #ffffff;
+            box-shadow: 0 0 0 2px #1b7e9f;
+            transform: scale(1.03);
         }
 
-    /* Button Styling */
-    .btn-primary {
-        background-color: #0077b6;
+    /* Animated Button */
+    .btn-create {
+        margin-top: 15px;
+        padding: 14px;
+        border-radius: 35px;
         border: none;
-        border-radius: 8px;
-        padding: 10px 20px;
-        width: 100%;
-        font-weight: 500;
+        background: linear-gradient(145deg, #0b4b6b, #1a7f9f);
+        color: white;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
         transition: 0.3s;
+        position: relative;
+        overflow: hidden;
     }
 
-        .btn-primary:hover {
-            background-color: #023e8a;
+        .btn-create:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.25);
         }
 
-    /* Back Link */
-    a {
-        color: #0077b6;
-        text-decoration: none;
-        font-weight: 500;
+        /* Button loading animation */
+        .btn-create.loading::after {
+            content: "";
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            border: 3px solid white;
+            border-top: 3px solid transparent;
+            border-radius: 50%;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            animation: spin 0.8s linear infinite;
+        }
+
+    @@keyframes spin {
+        100% {
+            transform: translateY(-50%) rotate(360deg);
+        }
     }
 
-        a:hover {
-            text-decoration: underline;
+    /* Responsive */
+    @@media(max - width:900px) {
+        .create-container {
+            flex-direction: column;
+            height: auto;
         }
+
+        .brand-panel {
+            border-radius: 35px 35px 0 0;
+        }
+
+        .form-panel {
+            border-radius: 0 0 35px 35px;
+        }
+
+        .form-row {
+            grid-template-columns: 1fr;
+        }
+    }
+
+
+    /* Font Awesome Icons */
+    @@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
 </style>
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="PatientName" class="control-label"></label>
-                <input asp-for="PatientName" class="form-control" />
-                <span asp-validation-for="PatientName" class="text-danger"></span>
+<script>
+    const form = document.querySelector("form");
+    const btn = document.querySelector(".btn-create");
+
+    form.addEventListener("submit", function () {
+        btn.classList.add("loading");
+        btn.innerText = "Creating...";
+    });
+</script>
+
+
+<div class="wrapper-3d">
+    <div class="create-container">
+        <!-- Left 3D Brand Panel -->
+        <div class="brand-panel">
+            <div class="brand-icon">
+                <i class="fas fa-user-injured"></i> <!-- 3D patient icon -->
             </div>
-            <div class="form-group">
-                <label asp-for="Dob" class="control-label"></label>
-                <input asp-for="Dob" class="form-control" />
-                <span asp-validation-for="Dob" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Gender" class="control-label"></label>
-                <input asp-for="Gender" class="form-control" />
-                <span asp-validation-for="Gender" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Address" class="control-label"></label>
-                <input asp-for="Address" class="form-control" />
-                <span asp-validation-for="Address" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Phone" class="control-label"></label>
-                <input asp-for="Phone" class="form-control" />
-                <span asp-validation-for="Phone" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Summary" class="control-label"></label>
-                <input asp-for="Summary" class="form-control" />
-                <span asp-validation-for="Summary" class="text-danger"></span>
-            </div>
-            
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+            <h1>WeHealth</h1>
+            <p>New Patient Registration</p>
+            <div class="shape-3d"></div>
+        </div>
+
+        <!-- Right Form Panel -->
+        <div class="form-panel">
+            <h2 class="form-title">Create Patient</h2>
+            <form asp-action="Create" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label asp-for="PatientName"></label>
+                        <input asp-for="PatientName" class="form-control" placeholder="Full name" />
+                        <span asp-validation-for="PatientName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Dob"></label>
+                        <input asp-for="Dob" type="date" class="form-control" />
+                        <span asp-validation-for="Dob" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Gender"></label>
+                        <input asp-for="Gender" class="form-control" placeholder="Male / Female / Other" />
+                        <span asp-validation-for="Gender" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Phone"></label>
+                        <input asp-for="Phone" class="form-control" placeholder="+1234567890" />
+                        <span asp-validation-for="Phone" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label asp-for="Email"></label>
+                        <input asp-for="Email" type="email" class="form-control" placeholder="patient@example.com" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label asp-for="Address"></label>
+                        <input asp-for="Address" class="form-control" placeholder="Street, City, ZIP" />
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label asp-for="Summary"></label>
+                        <textarea asp-for="Summary" class="form-control" rows="3" placeholder="Brief medical summary..."></textarea>
+                        <span asp-validation-for="Summary" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-create">Create Patient</button>
+            </form>
+
+            <a asp-action="Index" class="back-link">← Back to Patient List</a>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-
-
-
-
+<!-- Include Font Awesome if not already in layout -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
