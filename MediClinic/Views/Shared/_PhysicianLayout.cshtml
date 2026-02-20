@@ -118,11 +118,21 @@
         <a asp-controller="Physician" asp-action="ViewSchedule">
             <i class="bi bi-calendar-check"></i> My Schedule
         </a>
+        <a asp-controller="Physician" asp-action="ResetPassword">
+            <i class="bi bi-calendar-check"></i> Reset Password
+        </a>
 
         <a asp-controller="Physician" asp-action="DrugRequest">
             <i class="bi bi-capsule"></i> Drug Request
         </a>
-
+        @* <div class="sidebar-footer">
+            <a asp-controller="Physician"
+               asp-action="ResetPassword"
+               class="logout-link">
+                <i class="bi bi-box-arrow-right me-2"></i> Reset Password
+            </a>
+        </div> *@
+    
         <div class="sidebar-footer">
             <a asp-controller="CrediMgr"
                asp-action="Logout"

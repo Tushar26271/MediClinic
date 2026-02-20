@@ -1199,6 +1199,7 @@ namespace MediClinic.Controllers
         {
             var exists = await _context.Schedules.AnyAsync(s =>
                 s.PhysicianId == PhysicianID &&
+                s.ScheduleStatus!="Completed" &&
                 s.ScheduleDate == DateOnly.FromDateTime(ScheduleDate) &&
                 s.ScheduleTime == TimeOnly.FromTimeSpan(ScheduleTime));
 

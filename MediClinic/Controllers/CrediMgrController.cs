@@ -93,7 +93,7 @@ namespace MediClinic.Controllers
                 await _context.SaveChangesAsync();
                 TempData["ShowSuccess"] = true;
                 TempData["SuccessMessage"] =
-                "Record created successfully. Your temporary password is your name followed by @ and the last four digits of your registered phone number.";
+                "Record created successfully. When admin approves Your temporary password is your name followed by @ and the last four digits of your registered phone number.";
                 return RedirectToAction("Index", "Home");
             }
             return View(patient);

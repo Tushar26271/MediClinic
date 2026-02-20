@@ -30,6 +30,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Physician.PhysicianName)
             </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ScheduleStatus)
+                </th>
             <th></th>
         </tr>
     </thead>
@@ -45,10 +48,12 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Appointment.Patient.PatientName)
                 </td>
-
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Physician.PhysicianName)
+                    </td>
             
             <td>
-                    @Html.DisplayFor(modelItem => item.Physician.PhysicianName)
+                        @Html.DisplayFor(modelItem => item.ScheduleStatus)
             </td>
             @* <td>
                 <a asp-action="Edit" asp-route-id="@item.ScheduleId">Edit</a> |

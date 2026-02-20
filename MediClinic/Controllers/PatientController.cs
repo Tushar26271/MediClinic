@@ -32,7 +32,43 @@ namespace MediClinic.Controllers
             return View(patient);
         }
 
+        public IActionResult ResetPassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult ResetPassword(SupplierResetPasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
 
+            var username = User.Identity.Name;
+
+            var user = _context.Users
+                               .FirstOrDefault(u => u.UserName == username);
+
+            if (user == null)
+            {
+                ModelState.AddModelError("", "User not found.");
+                return View(model);
+            }
+
+            if (user.Password != model.OldPassword)
+            {
+                ModelState.AddModelError("", "Old password is incorrect.");
+                return View(model);
+            }
+
+            user.Password = model.Password;
+
+            _context.SaveChanges();
+
+            TempData["ShowSuccess"] = true;
+            TempData["SuccessMessage"] = "Patient password changed successfully!";
+
+            return RedirectToAction("Index", "Patient");
+        }
 
         public async Task<IActionResult> Edit(int? id)
         {
@@ -151,7 +187,7 @@ namespace MediClinic.Controllers
                 return NotFound();
             }
             var appointments = await _context.Appointments
-                .Where(a => a.PatientId == id && a.ScheduleStatus == "Pending")
+                .Where(a => a.PatientId == id )
                 .ToListAsync();
 
             return View(appointments);
@@ -168,7 +204,7 @@ namespace MediClinic.Controllers
                 .Include(s => s.Appointment)
                 .Include(s => s.Physician)
                 .Where(s => s.Appointment.PatientId == id
-                            && s.ScheduleStatus == "Scheduled")
+                            )
                 .ToListAsync();
 
             if (schedules == null || !schedules.Any())
@@ -178,6 +214,24 @@ namespace MediClinic.Controllers
 
             return View(schedules);
         }
+        //public async Task<IActionResult> ViewAdvice(int id)
+        //{
+        //    var adviceList = await _context.PhysicianAdvices
+        //        .Where(a => a.ScheduleId == id)
+        //        .ToListAsync();
+
+        //    return View(adviceList);
+        //}
+
+
+        //public async Task<IActionResult> ViewPrescription(int id)
+        //{
+        //    var prescription = await _context.PhysicianPrescrips
+        //        .Where(p => p.PhysicianAdvice.ScheduleId == id)
+        //        .ToListAsync();
+
+        //    return View(prescription);
+        //}
         public async Task<IActionResult> ViewAdvice(int id)
         {
             var adviceList = await _context.PhysicianAdvices

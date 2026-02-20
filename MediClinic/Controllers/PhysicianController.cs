@@ -1,4 +1,5 @@
 ﻿using MediClinic.Models;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -42,6 +43,44 @@ namespace MediClinic.Controllers
                 s.ScheduleDate >= DateOnly.FromDateTime(DateTime.Today));
 
             return View(schedules);
+        }
+
+        public IActionResult ResetPassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult ResetPassword(SupplierResetPasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var username = User.Identity.Name;
+
+            var user = _context.Users
+                               .FirstOrDefault(u => u.UserName == username);
+
+            if (user == null)
+            {
+                ModelState.AddModelError("", "User not found.");
+                return View(model);
+            }
+
+            if (user.Password != model.OldPassword)
+            {
+                ModelState.AddModelError("", "Old password is incorrect.");
+                return View(model);
+            }
+
+            user.Password = model.Password;
+
+            _context.SaveChanges();
+
+            TempData["ShowSuccess"] = true;
+            TempData["SuccessMessage"] = "Physician password changed successfully!";
+
+            return RedirectToAction("Index", "Physician");
         }
 
         // ================= VIEW SCHEDULE =================
@@ -95,13 +134,8 @@ namespace MediClinic.Controllers
         [HttpPost]
         public IActionResult DrugRequest(DrugRequest d)
         {
-            if (!ModelState.IsValid)
-                return View(d);
-
+            
             var user = User.Identity;
-
-            if (user == null)
-                return RedirectToAction("Login", "Account");
 
             DrugRequest obj = new DrugRequest
             {
