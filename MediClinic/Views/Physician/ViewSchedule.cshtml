@@ -26,6 +26,11 @@
                             <th>Date</th>
                             <th>Time</th>
                             <th>Patient</th>
+
+                            <!-- ✅ ADDED -->
+                            <th>Criticality</th>
+                            <th>Reason</th>
+
                             <th>Status</th>
                             <th class="text-center">Actions</th>
                         </tr>
@@ -48,7 +53,17 @@
 
                                 <!-- PATIENT -->
                                 <td>
-                                    @item.Appointment?.Patient?.PatientName 
+                                    @item.Appointment?.Patient?.PatientName
+                                </td>
+
+                                <!-- ✅ ADDED CRITICALITY -->
+                                <td>
+                                    @(item.Appointment?.Criticality ?? "-")
+                                </td>
+
+                                <!-- ✅ ADDED REASON -->
+                                <td>
+                                    @(item.Appointment?.Reason ?? "-")
                                 </td>
 
                                 <!-- STATUS -->
