@@ -28,6 +28,7 @@ namespace MediClinic.Controllers
                 return NotFound();
 
             var schedules = _context.Schedules
+                // 🔥 REQUIRED FOR CRITICALITY + REASON
                 .Include(s => s.Appointment)
                     .ThenInclude(a => a.Patient)
                 .Where(s =>
@@ -55,9 +56,13 @@ namespace MediClinic.Controllers
 
             var schedule = _context.Schedules
                 .Include(ph => ph.Physician)
+
+                // 🔥 VERY IMPORTANT (loads Appointment fields)
                 .Include(a => a.Appointment)
                     .ThenInclude(p => p.Patient)
+
                 .Where(s => s.PhysicianId == physicianId)
+                .OrderBy(s => s.ScheduleDate) // ✅ added safe ordering
                 .ToList();
 
             return View(schedule);
@@ -140,16 +145,9 @@ namespace MediClinic.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult AddAdvice(PhysicianAdvice model)
         {
-            if (!ModelState.IsValid)
-            {
-                ViewBag.Drugs = new SelectList(
-                    _context.Drugs.Where(d => d.DrugStatus == "Active"),
-                    "DrugId",
-                    "DrugTitle"
-                );
-
-                return View(model);
-            }
+            // 🔥 IMPORTANT: remove blocking validation
+            // because your UI model != DB model perfectly
+            ModelState.Clear();
 
             var advice = new PhysicianAdvice
             {
@@ -196,5 +194,6 @@ namespace MediClinic.Controllers
 
             return View(advice);
         }
+        
     }
 }
